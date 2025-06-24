@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function Post() {
-  const [likes, setLikes] = useState(247);
+  const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
   const handleLike = () => {
@@ -14,7 +14,7 @@ export default function Post() {
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = () => {  //TO DO
     if (window.confirm('Are you sure you want to delete this post?')) {
       alert('Post deleted!');
     }
@@ -25,6 +25,7 @@ export default function Post() {
       {/* Image with author overlay */}
       <div className="relative">
         <img 
+        // ADD URL HERE
           src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
           alt="Beautiful mountain landscape" 
           className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
@@ -32,7 +33,8 @@ export default function Post() {
         <div className="absolute top-4 left-4 bg-black bg-opacity-40 backdrop-blur-sm text-white px-4 py-3 rounded-xl border border-white border-opacity-20 shadow-lg">
           <div className="flex items-center space-x-2">
             <div className="w-9 h-9 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-sm font-bold shadow-md">
-              SJ
+              SJ   
+              {/* ADD PROP HERE */}
             </div>
             <div>
               <p className="text-sm font-bold tracking-wide">Sarah Johnson</p>
@@ -52,7 +54,7 @@ export default function Post() {
           <span className="inline-block bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs px-3 py-1.5 rounded-full mr-2 mb-2 shadow-md hover:shadow-lg transition-shadow">#travel</span>
         </div>
 
-        {/* Description */}
+        {/* Description ADD DESCRIPTION PROP HERE */}
         <p className="text-gray-700 text-sm mb-6 leading-relaxed font-medium">
           Just witnessed the most breathtaking sunrise over the Rocky Mountains! The golden light cascading over the peaks was absolutely magical. This hidden gem is definitely worth the early morning hike. Nature never fails to amaze me! 🏔️✨
         </p>
