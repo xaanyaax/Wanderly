@@ -4,8 +4,6 @@ import cors from "cors";
 import connectDB from "./src/database/connect.js";
 import * as dotenv from "dotenv";
 
-
-
 dotenv.config();
 
 const app = express();
