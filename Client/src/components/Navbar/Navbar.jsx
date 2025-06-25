@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const handleSignIn = () => {
@@ -47,6 +48,7 @@ export default function Navbar() {
           </a>
         </li>
         <li>
+          <Link to={'/contact'}>
           <a 
             href="#" 
             className="text-gray-600 font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:text-indigo-500 hover:bg-indigo-50 hover:-translate-y-1 relative overflow-hidden group"
@@ -54,6 +56,7 @@ export default function Navbar() {
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></span>
             Contact
           </a>
+          </Link>
         </li>
       </ul>
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Form from "../components/Form/Form";
 import Posts from "../components/Posts/Posts";
 import axios from "axios";
-import Navbar from "../components/Navbar/Navbar";
 
 
 function Home() {
@@ -29,7 +28,7 @@ function Home() {
 
   return (
     <div>
-      <Navbar/>
+      
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex px-1 py-8 gap-8">
       {/* <Navbar /> */}
       <div className="flex-1">
