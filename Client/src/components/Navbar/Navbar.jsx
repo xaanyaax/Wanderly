@@ -9,6 +9,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white/95 backdrop-blur-md border-b border-white/20 px-8 py-4 flex justify-between items-center sticky top-0 z-50" style={{ boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37)' }}>
       {/* Logo Container */}
+      <Link to={"/"}>
       <div className="flex items-center gap-3 cursor-pointer transition-transform duration-300 hover:scale-105">
         <span className="text-3xl" style={{
           animation: 'rotate 20s linear infinite'
@@ -17,6 +18,7 @@ export default function Navbar() {
           Wanderly
         </span>
       </div>
+      </Link>
 
       {/* Navigation Menu - Always visible */}
       <ul className="flex list-none gap-8 items-center">
@@ -39,6 +41,7 @@ export default function Navbar() {
           </a>
         </li>
         <li>
+          <Link to={'/about'}>
           <a 
             href="#" 
             className="text-gray-600 font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:text-indigo-500 hover:bg-indigo-50 hover:-translate-y-1 relative overflow-hidden group"
@@ -46,6 +49,7 @@ export default function Navbar() {
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></span>
             About
           </a>
+          </Link>
         </li>
         <li>
           <Link to={'/contact'}>
