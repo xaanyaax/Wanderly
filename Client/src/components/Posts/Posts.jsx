@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Post from './Post';
+import Post from './Post/Post.jsx';
 
 export default function Posts({ posts, onPostDeleted }) {
   return (

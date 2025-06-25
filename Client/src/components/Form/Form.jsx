@@ -1,12 +1,7 @@
-//Problem: 
-//onPostCreated needed!
-//also update HandleSubmit
-
-
 import { useState } from "react";
 import axios from "axios";
 
-export default function Form() {
+export default function Form({ onPostCreated }) {
   const [formData, setFormData] = useState({
     creator: "",
     title: "",
@@ -30,11 +25,36 @@ export default function Form() {
     }));
   };
 
+  // Helper: Convert image file to base64
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post('http://localhost:8080/posts', formData)
-    onPostCreated(res.data);
-    setFormData({ creator: '', title: '', message: '', tags: '', file: null });
+
+    let base64File = "";
+    if (formData.file) {
+      base64File = await convertToBase64(formData.file);
+    }
+
+    const postData = {
+      ...formData,
+      selectedFile: base64File, // The backend expects this field
+    };
+
+    try {
+      const res = await axios.post("http://localhost:8080/posts", postData);
+      onPostCreated(res.data); // Notify parent component
+      handleClear(); // Reset form
+    } catch (err) {
+      console.error("Failed to create post:", err);
+    }
   };
 
   const handleClear = () => {
@@ -46,16 +66,14 @@ export default function Form() {
       file: null,
     });
 
-    // Clear file input
+    // Clear the actual file input field visually
     const fileInput = document.querySelector('input[type="file"]');
     if (fileInput) fileInput.value = "";
   };
 
   return (
     <>
-      {/* Main form container */}
       <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-2xl transform hover:scale-105 transition-all duration-300">
-        {/* Glowing border effect */}
         <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-20 blur-xl"></div>
 
         <div className="relative z-10">
@@ -63,79 +81,44 @@ export default function Form() {
             ✨ Creating a Memory ✨
           </h1>
 
-          <form onSubmit= {handleSubmit}>
-
+          <form onSubmit={handleSubmit}>
             <div className="space-y-6">
-              <div className="group">
-                <input
-                  type="text"
-                  name="creator"
-                  placeholder="Creator"
-                  value={formData.creator}
-                  onChange={handleInputChange}
-                  className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-all duration-300 hover:bg-white/10 group-hover:shadow-lg group-hover:shadow-pink-500/25"
-                />
-              </div>
-
-              <div className="group">
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 hover:bg-white/10 group-hover:shadow-lg group-hover:shadow-purple-500/25"
-                />
-              </div>
-
-              <div className="group">
-                <input
-                  type="text"
-                  name="message"
-                  placeholder="Message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-300 hover:bg-white/10 group-hover:shadow-lg group-hover:shadow-cyan-500/25"
-                />
-              </div>
-
-              <div className="group">
-                <input
-                  type="text"
-                  name="tags"
-                  placeholder="Tags"
-                  value={formData.tags}
-                  onChange={handleInputChange}
-                  className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300 hover:bg-white/10 group-hover:shadow-lg group-hover:shadow-yellow-500/25"
-                />
-              </div>
-
-              <div className="group">
-                <div className="relative">
+              {["creator", "title", "message", "tags"].map((field) => (
+                <div key={field} className="group">
                   <input
-                    type="file"
-                    onChange={handleFileChange}
-                    className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-gradient-to-r file:from-pink-500 file:to-purple-500 file:text-white file:font-medium file:cursor-pointer hover:file:from-pink-600 hover:file:to-purple-600 focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all duration-300 hover:bg-white/10 group-hover:shadow-lg group-hover:shadow-pink-500/25"
+                    type="text"
+                    name={field}
+                    placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                    value={formData[field]}
+                    onChange={handleInputChange}
+                    className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-300"
                   />
                 </div>
+              ))}
+
+              <div className="group">
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="w-full px-6 py-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-2xl text-white file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-gradient-to-r file:from-pink-500 file:to-purple-500 file:text-white file:font-medium file:cursor-pointer"
+                />
               </div>
 
               <button
                 type="submit"
-               
-                className="w-full py-4 px-6 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white font-bold rounded-2xl hover:from-pink-600 hover:via-purple-600 hover:to-cyan-600 focus:outline-none focus:ring-4 focus:ring-purple-500/50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 active:scale-95"
+                className="w-full py-4 px-6 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white font-bold rounded-2xl hover:scale-105 hover:shadow-2xl transition-all duration-300"
               >
                 🚀 SUBMIT
               </button>
-            </div>
 
-            <button
-              type="button"
-              onClick={handleClear}
-              className="w-full mt-4 py-4 px-6 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium rounded-2xl hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95"
-            >
-              🗑️ CLEAR
-            </button>
+              <button
+                type="button"
+                onClick={handleClear}
+                className="w-full mt-4 py-4 px-6 bg-white/10 border border-white/20 text-white rounded-2xl hover:bg-white/20"
+              >
+                🗑️ CLEAR
+              </button>
+            </div>
           </form>
         </div>
       </div>

@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import moment from "moment";
-import axios from axios
+import axios from "axios";
 
-export default function Post() {
+export default function Post({ post, onPostDeleted }) {
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
+  const { _id, creator, title, message, tags, selectedFile, createdAt } = post;
+
   const handleLike = () => {
-    if (isLiked) {
-      setLikes(likes - 1);
-      setIsLiked(false);
-    } else {
-      setLikes(likes + 1);
-      setIsLiked(true);
-    }
+    setLikes((prev) => (isLiked ? prev - 1 : prev + 1));
+    setIsLiked((prev) => !prev);
   };
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this post?')) {
-      await axios.delete(`http://localhost:8080/posts/${post._id}`);
-      onPostDeleted(post._id); // Inform parent to remove it from UI
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      try {
+        await axios.delete(`http://localhost:8080/posts/${_id}`);
+        onPostDeleted(_id);
+      } catch (error) {
+        console.error("Delete failed:", error);
+      }
     }
   };
 
@@ -35,7 +36,7 @@ export default function Post() {
         <div className="absolute top-3 left-3 bg-black bg-opacity-50 text-white px-3 py-2 rounded-lg">
           <div className="flex items-center space-x-2">
             <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-xs font-bold">
-              SJ
+              {creator?.[0] || "?"}
             </div>
             <div>
               <p className="text-xs font-semibold">{creator}</p>
@@ -49,20 +50,20 @@ export default function Post() {
 
       {/* Content */}
       <div className="p-4">
-        {/* Hashtags */}
+        {/* Tags */}
         <div className="mb-3 flex flex-wrap gap-1">
           {tags?.split(",").map((tag, i) => (
-            <span key={i} className="...">
+            <span
+              key={i}
+              className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
+            >
               #{tag.trim()}
             </span>
           ))}
         </div>
 
         {/* Description */}
-        <p className="text-gray-700 text-sm mb-4 leading-relaxed">
-          Breathtaking sunrise over the Rocky Mountains! The golden light was
-          absolutely magical. 🏔️✨
-        </p>
+        <p className="text-gray-700 text-sm mb-4 leading-relaxed">{message}</p>
 
         {/* Actions */}
         <div className="flex items-center justify-between">
