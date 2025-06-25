@@ -1,28 +1,35 @@
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
-  title: {
+  Creator: {
     type: String,
     required: true,
   },
-  message: {
+
+  Title: {
     type: String,
     required: true,
   },
-  creator: {
+
+  Message: {
     type: String,
+    required: true,
   },
+
   tags: {
     type: [String],
     default: [],
   },
+
   selectedFile: {
     type: String,
   },
+
   likeCount: {
     type: Number,
     default: 0,
   },
+
   createdAt: {
     type: Date,
     default: () => new Date(), // avoids Date being fixed at schema creation time
