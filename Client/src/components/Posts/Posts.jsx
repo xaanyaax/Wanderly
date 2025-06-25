@@ -1,15 +1,13 @@
-import React from 'react';
-import Post from './Post/Post';
 
-export default function Posts({ posts, onDelete }) {
+import React from 'react';
+import Post from './Post';
+
+export default function Posts({ posts, onPostDeleted }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      {posts.map((post) => (
+        <Post key={post._id} post={post} onPostDeleted={onPostDeleted} />
+      ))}
     </div>
   );
 }
