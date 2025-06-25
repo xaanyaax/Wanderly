@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import Form from "../components/Form/Form";
 import Posts from "../components/Posts/Posts";
 import axios from "axios";
+import Navbar from "../components/Navbar/Navbar";
+
 
 function Home() {
+
+
   const [posts, setPosts] = useState([]);
 
   // Fetch posts from backend once when component loads
@@ -24,7 +28,10 @@ function Home() {
   };
 
   return (
+    <div>
+      <Navbar/>
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex px-1 py-8 gap-8">
+      {/* <Navbar /> */}
       <div className="flex-1">
         {/* Pass posts and delete handler */}
         <Posts posts={posts} onPostDeleted={handlePostDeleted} />
@@ -34,6 +41,7 @@ function Home() {
         {/* Pass onPostCreated to Form */}
         <Form onPostCreated={handlePostCreated} />
       </div>
+    </div>
     </div>
   );
 }
