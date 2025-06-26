@@ -1,5 +1,5 @@
 import React from 'react';
-import images from '../assets/images';
+// import images from '../assets/images';
 
 export default function AboutMe() {
   return (
@@ -54,7 +54,7 @@ export default function AboutMe() {
             <div className="relative w-48 h-48 md:w-56 md:h-56 bg-gradient-to-br from-rose-200 to-pink-300 rounded-full shadow-2xl overflow-hidden group-hover:shadow-rose-300/50 transition-all duration-300 transform group-hover:scale-105">
               <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/20 to-transparent"></div>
               <div className="flex items-center justify-center h-full">
-                <img src={IMG_1949.jpg} alt="" />
+                <img src="" alt="" />
               </div>
               
               {/* Shimmer Effect */}
