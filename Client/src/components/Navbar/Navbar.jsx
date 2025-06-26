@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const handleSignIn = () => {
-    alert('Sign In clicked! You can integrate your authentication system here.');
+    //add code here
+    
   };
 
   return (
@@ -65,6 +66,7 @@ export default function Navbar() {
       </ul>
 
       {/* Sign In Button */}
+      <Link to={'/login'}>
       <button 
         onClick={handleSignIn}
         className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white border-none px-6 py-3 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 relative overflow-hidden group"
@@ -75,6 +77,7 @@ export default function Navbar() {
         <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></span>
         <span className="relative">Sign In</span>
       </button>
+      </Link>
 
       <style jsx>{`
         @keyframes rotate {

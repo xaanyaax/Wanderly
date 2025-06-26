@@ -16,6 +16,8 @@ export default function App() {
       <Route path="/about" element={<AboutMe />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="*" element={<div>404 Not Found</div>} />
+
       </Routes>
     </div>
   );
