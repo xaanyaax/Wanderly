@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import connectDB from "./src/database/connect.js";
 import * as dotenv from "dotenv";
-import userRoutes from "./src/routes/userRoutes.js";
+
 
 dotenv.config();
 
@@ -17,6 +17,7 @@ app.use(cors())
 import postRoutes from "./src/routes/posts.js";
 app.use("/posts", postRoutes);  //every route starts with posts  local::host//8080/posts
 
+import userRoutes from "./src/routes/userRoutes.js";
 app.use("/api/users", userRoutes);
 
 const startServer = async () => {
