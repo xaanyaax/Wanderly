@@ -29,6 +29,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+//Add middleware in future
+
 //define model or the collection name
 const User = new mongoose.model("User", userSchema);
 
