@@ -4,12 +4,13 @@ import jwt from "jsonwebtoken";
 
 // Register a new user
 export const registerUser = async (req, res) => {
-  const { username, email, phone, password } = req.body;
+  const { username, email, phone, password } = req.body; //1. get registration data
 
   try {
     // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "User already exists" });
+    const existingUser = await User.findOne({ email: email }); //2. check if user already exists with email
+    if (existingUser)
+      return res.status(400).json({ message: "User already exists" });
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -22,9 +23,13 @@ export const registerUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    res.status(201).json({ message: "User registered successfully", user: newUser });
+    res
+      .status(201)
+      .json({ message: "User registered successfully", user: newUser });
   } catch (err) {
-    res.status(500).json({ message: "Something went wrong", error: err.message });
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: err.message });
   }
 };
 
@@ -37,11 +42,16 @@ export const loginUser = async (req, res) => {
     if (!user) return res.status(400).json({ message: "User not found" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, "jwt_secret_key", {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      "jwt_secret_key",
+      {
+        expiresIn: "1d",
+      }
+    );
 
     res.status(200).json({ token, user });
   } catch (err) {

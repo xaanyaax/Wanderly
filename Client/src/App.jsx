@@ -3,6 +3,8 @@ import Home from "./pages/Home.jsx";
 import {Routes , Route} from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar.jsx";
 import AboutMe from "./pages/About.jsx";
+import SignUpPage from "./pages/SignUp.jsx";
+import LoginPage from "./pages/Login.jsx";
 
 export default function App() {
   return (
@@ -12,6 +14,8 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<AboutMe />} />
+      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/login" element={<LoginPage />} />
       </Routes>
     </div>
   );
