@@ -16,6 +16,7 @@ app.use(cors())
 import postRoutes from "./src/routes/posts.js";
 app.use("/posts", postRoutes);  //every route starts with posts  local::host//8080/posts
 
+app.use("/api/users", userRoutes);
 
 const startServer = async () => {
     try {
