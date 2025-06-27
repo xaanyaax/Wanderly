@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
+
+  const navigate = useNavigate();
+
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -19,10 +25,22 @@ export default function LoginPage() {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log('Login submitted:', formData);
-    // Handle login logic here
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post("http://localhost:8080/api/users/login", formData); // adjust URL as per your backend
+      const token = res.data.token;
+  
+      localStorage.setItem("token", token);
+      alert("Login successful!");
+  
+      // redirect to protected/dashboard route
+      navigate("/dashboard");
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Login failed. Please try again.");
+    }
   };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">

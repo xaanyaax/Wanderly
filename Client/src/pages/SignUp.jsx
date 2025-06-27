@@ -19,6 +19,11 @@ export default function SignUpPage() {
 
   const handleSubmit = () => {
     console.log("Form submitted:", formData);
+
+
+
+
+    
   };
 
   const InputField = ({

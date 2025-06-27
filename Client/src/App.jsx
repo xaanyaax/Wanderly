@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import AboutMe from "./pages/About.jsx";
 import SignUpPage from "./pages/SignUp.jsx";
 import LoginPage from "./pages/Login.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
 export default function App() {
   return (
@@ -17,6 +18,9 @@ export default function App() {
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="*" element={<div>404 Not Found</div>} />
+
+      
+      <Route path="/dashboard" element={<Dashboard />} /> 
 
       </Routes>
     </div>
