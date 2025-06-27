@@ -1,16 +1,16 @@
 import express from "express";
-import bodyParser from "body-parser";
 import cors from "cors";
 import connectDB from "./src/database/connect.js";
 import * as dotenv from "dotenv";
+import errorMiddleware from "./src/middlewares/errorMiddleware.js";
 
 
 dotenv.config();
 
 const app = express();
 
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(express.json({ limit: "30mb" }));
+app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.use(cors())
 
 //Routes:
@@ -19,6 +19,8 @@ app.use("/posts", postRoutes);  //every route starts with posts  local::host//80
 
 import userRoutes from "./src/routes/userRoutes.js";
 app.use("/api/users", userRoutes);
+
+app.use(errorMiddleware);
 
 const startServer = async () => {
     try {

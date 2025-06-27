@@ -1,4 +1,3 @@
-
 import { ZodSchema } from "zod";
 
 const validate = (schema) => async (req, res, next) => {
@@ -7,11 +6,9 @@ const validate = (schema) => async (req, res, next) => {
     req.body = parsedBody;
     next();
   } catch (error) {
-    return res.status(400).json({
-        
-      message: "Validation failed",
-      errors: error.errors, // more informative
-    });
+    error.status = 400; // optional: mark as client error
+    error.extraDetails = "Zod schema validation failed";
+    next(error); // pass to centralized error middleware
   }
 };
 
