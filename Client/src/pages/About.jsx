@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const About = () => {
+const AboutUs = () => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -46,12 +46,7 @@ const About = () => {
       emoji: "💡",
       bgImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
     },
-    {
-      title: "Real-Time Trends & Top Spots",
-      description: "See trending destinations and most liked locations in real time.",
-      emoji: "📈",
-      bgImage: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    }
+    
   ];
 
   return (
@@ -76,7 +71,7 @@ const About = () => {
               🌍
             </span>
           </h1>
-          <p className="text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-2xl text-white max-w-2xl mx-auto leading-relaxed">
             Discover the world through the eyes of fellow travelers
           </p>
         </div>
@@ -117,7 +112,7 @@ const About = () => {
                   <h2 className="text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                     {section.title}
                   </h2>
-                  <p className="text-xl lg:text-2xl text-gray-300 leading-relaxed">
+                  <p className="text-xl lg:text-2xl text-white leading-relaxed">
                     {section.description}
                   </p>
                   <div className="inline-block">
@@ -140,7 +135,7 @@ const About = () => {
                       <h3 className="text-2xl font-semibold mb-4 text-white">
                         {section.title}
                       </h3>
-                      <p className="text-gray-400 leading-relaxed">
+                      <p className="text-white leading-relaxed">
                         {section.description}
                       </p>
                       <div className="mt-6 flex items-center space-x-2 text-blue-400 group-hover:text-blue-300 transition-colors">
@@ -160,10 +155,7 @@ const About = () => {
       <div className="relative h-screen flex items-center justify-center">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`,
-            transform: `translateY(${scrollY * 0.2}px)`
-          }}
+          
         />
         <div className="absolute inset-0 bg-black bg-opacity-70" />
         <div className="relative z-10 text-center space-y-8">
@@ -188,4 +180,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutUs;
