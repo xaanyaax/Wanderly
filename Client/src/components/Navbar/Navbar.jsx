@@ -8,7 +8,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md border-b border-white/20 px-8 py-4 flex justify-between items-center sticky top-0 z-50" style={{ boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37)' }}>
+    <nav className="bg-black/95 backdrop-blur-md border-b border-white/20 px-8 py-4 flex justify-between items-center sticky top-0 z-50" style={{ boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37)' }}>
       {/* Logo Container */}
       <Link to={"/"}>
       <div className="flex items-center gap-3 cursor-pointer transition-transform duration-300 hover:scale-105">
@@ -88,3 +88,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
