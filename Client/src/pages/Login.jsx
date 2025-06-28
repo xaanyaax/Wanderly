@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom"
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -21,21 +24,26 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //make sure to make username , email , phone no dynamic
+  
     try {
-
-      // Replace with your actual API call
-      // const res = await axios.post("http://localhost:8080/api/users/login", formData);
-      console.log("Form submitted:", formData);
+      const res = await axios.post("http://localhost:8080/api/users/login", formData, {
+        withCredentials: true, // ✅ if using cookies (optional)
+      });
+  
+      console.log("Login successful:", res.data);
       alert("Login successful!");
-      
-      // Replace with your navigation logic
-      // navigate("/dashboard");
+  
+      // ✅ Store token if returned (optional)
+      // localStorage.setItem("token", res.data.token);
+  
+      // ✅ Navigate to dashboard or home
+      navigate("/");
     } catch (err) {
-      console.error(err);
-      alert("Login failed. Please try again.");
+      console.error("Login error:", err);
+      alert(err.response?.data?.message || "Login failed. Please try again.");
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-black relative flex items-center justify-center p-4 overflow-hidden">
