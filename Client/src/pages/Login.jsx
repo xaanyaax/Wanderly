@@ -26,17 +26,13 @@ export default function LoginPage() {
     e.preventDefault();
   
     try {
-      const res = await axios.post("http://localhost:8080/api/users/login", formData, {
-        withCredentials: true, // ✅ if using cookies (optional)
-      });
-  
+      const res = await axios.post("http://localhost:8080/api/users/login", formData);
       console.log("Login successful:", res.data);
-      alert("Login successful!");
   
-      // ✅ Store token if returned (optional)
+      // 🔐 Save token
       // localStorage.setItem("token", res.data.token);
   
-      // ✅ Navigate to dashboard or home
+      alert("Login successful!");
       navigate("/");
     } catch (err) {
       console.error("Login error:", err);

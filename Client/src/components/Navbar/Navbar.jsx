@@ -74,14 +74,16 @@ export default function Navbar() {
           <li>
             <a
               href="#"
-              className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:text-indigo-400 hover:bg-white/5 hover:-translate-y-1 relative overflow-hidden group border border-transparent hover:border-indigo-500/30"
+              className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-500 hover:text-white hover:bg-gradient-to-r hover:from-indigo-600/20 hover:to-purple-600/20 hover:-translate-y-1 hover:scale-105 relative overflow-hidden group border border-transparent hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/25"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-              <span className="relative">Explore</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500 rounded-lg"></div>
+              <span className="relative">Explore 🚀</span>
             </a>
           </li>
           {/* DESTINATION KEEP OR NOT?? */}
           <li className="flex items-center gap-2">
+
+            
             {/* <a 
               href="#" 
               className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:text-indigo-400 hover:bg-white/5 hover:-translate-y-1 relative overflow-hidden group border border-transparent hover:border-indigo-500/30"
@@ -90,26 +92,23 @@ export default function Navbar() {
               <span className="relative">Destinations</span>
             </a> */}
 
-            {/* Cool "+" Icon Button */}
+            {/* Cool "create" Icon Button */}
             <button
               onClick={handleAddDestination}
               onMouseEnter={() => setIsAddHovered(true)}
               onMouseLeave={() => setIsAddHovered(false)}
-              className="relative w-8 h-8 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 border border-indigo-400/30 transition-all duration-300 hover:scale-110 hover:-translate-y-1 group overflow-hidden"
+              className="relative w-8 h-8 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 border border-indigo-400/30 transition-all duration-700 hover:scale-110 hover:-translate-y-1 group overflow-hidden"
               style={{
                 boxShadow:
                   "0 4px 15px rgba(102, 126, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
               }}
             >
               {/* Animated background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
               {/* Plus icon with rotation animation */}
               <div
-                className={`relative flex items-center justify-center w-full h-full transition-transform duration-300 ${
+                className={`relative flex items-center justify-center w-full h-full transition-transform duration-700 ${
                   isAddHovered ? "rotate-90" : ""
                 }`}
               >
@@ -132,7 +131,7 @@ export default function Navbar() {
 
               {/* Glowing ring on hover */}
               <div
-                className={`absolute inset-0 rounded-full border-2 border-white/50 transition-all duration-300 ${
+                className={`absolute inset-0 rounded-full border-2 border-white/50 transition-all duration-700 ${
                   isAddHovered ? "scale-125 opacity-100" : "scale-100 opacity-0"
                 }`}
               ></div>
@@ -143,20 +142,20 @@ export default function Navbar() {
             {/* Caution! do not nest a tag inside Link tag! */}
             <a
               href="#"
-              className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:text-indigo-400 hover:bg-white/5 hover:-translate-y-1 relative overflow-hidden group border border-transparent hover:border-indigo-500/30"
+              className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-500 hover:text-white hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-pink-600/20 hover:-translate-y-1 hover:scale-105 relative overflow-hidden group border border-transparent hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/25"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-              <span className="relative">About</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-pink-500/0 to-indigo-500/0 group-hover:from-purple-500/10 group-hover:via-pink-500/10 group-hover:to-indigo-500/10 transition-all duration-500 rounded-lg"></div>
+              <span className="relative">Profile ✨</span>
             </a>
           </li>
 
           <li>
             <Link
               to="/contact"
-              className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:text-indigo-400 hover:bg-white/5 hover:-translate-y-1 relative overflow-hidden group border border-transparent hover:border-indigo-500/30"
+              className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-500 hover:text-white hover:bg-gradient-to-r hover:from-pink-600/20 hover:to-indigo-600/20 hover:-translate-y-1 hover:scale-105 relative overflow-hidden group border border-transparent hover:border-pink-500/50 hover:shadow-lg hover:shadow-pink-500/25"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-              <span className="relative">Contact</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/0 via-indigo-500/0 to-purple-500/0 group-hover:from-pink-500/10 group-hover:via-indigo-500/10 group-hover:to-purple-500/10 transition-all duration-500 rounded-lg"></div>
+              <span className="relative">Contact  ☎️</span>
             </Link>
           </li>
         </ul>
@@ -185,7 +184,6 @@ export default function Navbar() {
                 "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)";
             }}
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></span>
             <span className="relative">Sign In</span>
           </button>
         </Link>
@@ -213,15 +211,6 @@ export default function Navbar() {
           50% {
             transform: translateY(-10px) scale(1.05);
             opacity: 0.5;
-          }
-        }
-
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
           }
         }
       `}</style>
