@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function Create() {
   const [formData, setFormData] = useState({
@@ -8,23 +8,6 @@ export default function Create() {
     tags: '',
     file: null
   });
-
-  const [displayedText, setDisplayedText] = useState('');
-  const fullText = 'Create a Memory ✨';
-  
-  useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < fullText.length) {
-        setDisplayedText(fullText.slice(0, index + 1));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 100);
-    
-    return () => clearInterval(timer);
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -121,10 +104,24 @@ export default function Create() {
       </div>
 
       {/* Custom CSS for floating animation */}
-      <style >{`
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes glow {
+          0%, 100% { 
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.5),
+                         0 0 20px rgba(168, 85, 247, 0.3),
+                         0 0 30px rgba(168, 85, 247, 0.2);
+          }
+          50% { 
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.8),
+                         0 0 30px rgba(168, 85, 247, 0.6),
+                         0 0 40px rgba(168, 85, 247, 0.4),
+                         0 0 50px rgba(168, 85, 247, 0.2);
+          }
         }
       `}</style>
 
@@ -133,30 +130,13 @@ export default function Create() {
         <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-8 shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2 min-h-[3rem] flex items-center justify-center">
-              {displayedText}
-              <span className="animate-pulse ml-1 text-purple-400">|</span>
+            <h1 className="text-3xl font-bold text-white mb-2 h-12 flex items-center justify-center" style={{animation: 'glow 2s ease-in-out infinite'}}>
+              Create a Memory ✨
             </h1>
-            {/* <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div> */}
           </div>
 
           {/* Form */}
           <div className="space-y-6">
-            {/* Creator Field */}
-            {/* <div className="group">
-              <label className="block text-gray-300 text-sm font-medium mb-2 transition-colors group-focus-within:text-purple-400">
-                Creator
-              </label>
-              <input
-                type="text"
-                name="creator"
-                value={formData.creator}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-gray-800/70 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 hover:bg-gray-800/90"
-                placeholder="Enter creator name"
-              />
-            </div> */}
-
             {/* Title Field */}
             <div className="group">
               <label className="block text-gray-300 text-sm font-medium mb-2 transition-colors group-focus-within:text-purple-400">
@@ -220,6 +200,7 @@ export default function Create() {
             <div className="flex space-x-4 pt-4">
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transform transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 Share 💝
