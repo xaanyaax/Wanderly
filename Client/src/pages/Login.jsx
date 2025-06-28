@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom"
 
 export default function LoginPage() {
-
-  const navigate = useNavigate();
-
-
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -27,44 +21,78 @@ export default function LoginPage() {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/api/users/login", formData); // adjust URL as per your backend
-      const token = res.data.token;
-  
-      localStorage.setItem("token", token);
+      // Replace with your actual API call
+      // const res = await axios.post("http://localhost:8080/api/users/login", formData);
+      console.log("Form submitted:", formData);
       alert("Login successful!");
-  
-      // redirect to protected/dashboard route
-      navigate("/dashboard");
+      
+      // Replace with your navigation logic
+      // navigate("/dashboard");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Login failed. Please try again.");
+      alert("Login failed. Please try again.");
     }
   };
-  
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-      {/* Animated background elements */}
+    <div className="min-h-screen bg-black relative flex items-center justify-center p-4 overflow-hidden">
+      {/* Animated grid background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px',
+          animation: 'grid-move 20s linear infinite'
+        }}></div>
+      </div>
+
+      {/* Floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-40 left-40 w-80 h-80 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-4000"></div>
+        {/* Large floating orbs */}
+        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full blur-lg animate-bounce" style={{animationDuration: '3s'}}></div>
+        <div className="absolute bottom-32 left-40 w-40 h-40 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full blur-2xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-20 right-20 w-28 h-28 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-xl animate-bounce" style={{animationDuration: '4s', animationDelay: '2s'}}></div>
+
+        {/* Floating particles */}
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-purple-400 rounded-full animate-ping"></div>
+        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-cyan-400 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/3 w-1.5 h-1.5 bg-pink-400 rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-400 rounded-full animate-ping" style={{animationDelay: '3s'}}></div>
+
+        {/* Geometric lines */}
+        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/30 to-transparent"></div>
+        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent"></div>
+        <div className="absolute left-0 top-1/4 w-full h-px bg-gradient-to-r from-transparent via-pink-500/30 to-transparent"></div>
+        <div className="absolute left-0 bottom-1/3 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"></div>
+      </div>
+
+      {/* Animated background glow */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse transform -translate-x-1/2"></div>
+        <div className="absolute bottom-0 right-1/2 w-80 h-80 bg-cyan-600/10 rounded-full blur-3xl animate-pulse transform translate-x-1/2" style={{animationDelay: '2s'}}></div>
       </div>
 
       {/* Main card */}
       <div className="relative z-10 w-full max-w-md">
-        <div className="bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/20 p-6 transform hover:scale-105 transition-all duration-300">
+        <div className="bg-gray-900/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-700/50 p-6 transform hover:scale-105 transition-all duration-300 relative overflow-hidden">
+          {/* Card inner glow */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-cyan-500/5 rounded-3xl"></div>
+          
           {/* Header */}
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl mb-3 shadow-lg">
-              <div className="text-2xl animate-spin">🌍</div>
+          <div className="text-center mb-6 relative z-10">
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl mb-3 shadow-lg relative">
+              <div className="text-2xl animate-spin z-50">🌍</div>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl blur opacity-50 animate-pulse"></div>
             </div>
             <h1 className="text-2xl font-bold text-white mb-1">Welcome Back</h1>
-            <p className="text-white/70 text-sm">Sign in to your account</p>
+            <p className="text-gray-400 text-sm">Sign in to your account</p>
           </div>
 
           {/* Form */}
-          <div className="space-y-4">
+          <div className="space-y-4 relative z-10">
             {/* Email Field */}
             <div className="relative">
               <input
@@ -74,11 +102,11 @@ export default function LoginPage() {
                 onChange={handleInputChange}
                 onFocus={() => setFocusedField('email')}
                 onBlur={() => setFocusedField('')}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
+                className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
                 placeholder="Email address"
                 required
               />
-              <div className={`absolute left-4 top-0 -translate-y-1/2 px-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm rounded-full transition-all duration-300 ${focusedField === 'email' || formData.email ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
+              <div className={`absolute left-4 top-0 -translate-y-1/2 px-2 bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm rounded-full transition-all duration-300 ${focusedField === 'email' || formData.email ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
                 Email
               </div>
             </div>
@@ -92,14 +120,14 @@ export default function LoginPage() {
                 onChange={handleInputChange}
                 onFocus={() => setFocusedField('password')}
                 onBlur={() => setFocusedField('')}
-                className="w-full px-4 py-3 pr-12 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
+                className="w-full px-4 py-3 pr-12 bg-gray-800/50 border border-gray-600/50 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
                 placeholder="Password"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/70 hover:text-white transition-colors duration-200"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-200"
               >
                 {showPassword ? (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,21 +140,21 @@ export default function LoginPage() {
                   </svg>
                 )}
               </button>
-              <div className={`absolute left-4 top-0 -translate-y-1/2 px-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm rounded-full transition-all duration-300 ${focusedField === 'password' || formData.password ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
+              <div className={`absolute left-4 top-0 -translate-y-1/2 px-2 bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm rounded-full transition-all duration-300 ${focusedField === 'password' || formData.password ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
                 Password
               </div>
             </div>
 
-            {/* Remember Me & Forgot Password */}
+            {/* Remember me and Forgot password */}
             <div className="flex items-center justify-between">
               <label className="flex items-center space-x-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-white/20 bg-white/10 text-purple-500 focus:ring-purple-500 focus:ring-2"
+                  className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-purple-500 focus:ring-purple-500 focus:ring-2"
                 />
-                <span className="text-white/70 text-sm">Remember me</span>
+                <span className="text-gray-400 text-sm">Remember me</span>
               </label>
               <button className="text-purple-300 hover:text-purple-100 text-sm font-medium transition-colors duration-200 hover:underline">
                 Forgot password?
@@ -137,9 +165,10 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={handleSubmit}
-              className="w-full py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-transparent"
+              className="w-full py-3 bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-transparent relative overflow-hidden"
             >
-              <span className="flex items-center justify-center space-x-2">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-600 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="flex items-center justify-center space-x-2 relative z-10">
                 <span>Sign In</span>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -149,15 +178,15 @@ export default function LoginPage() {
           </div>
 
           {/* Divider */}
-          <div className="my-6 flex items-center">
-            <div className="flex-1 h-px bg-white/20"></div>
-            <span className="px-4 text-white/50 text-sm">or</span>
-            <div className="flex-1 h-px bg-white/20"></div>
+          <div className="my-6 flex items-center relative z-10">
+            <div className="flex-1 h-px bg-gray-600/50"></div>
+            <span className="px-4 text-gray-400 text-sm">or</span>
+            <div className="flex-1 h-px bg-gray-600/50"></div>
           </div>
 
           {/* Social Login */}
-          <div className="space-y-2">
-            <button className="w-full py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-white font-medium transition-all duration-300 flex items-center justify-center space-x-2 text-sm">
+          <div className="space-y-2 relative z-10">
+            <button className="w-full py-2.5 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-600/50 rounded-2xl text-white font-medium transition-all duration-300 flex items-center justify-center space-x-2 text-sm backdrop-blur-sm">
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                 <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -167,7 +196,7 @@ export default function LoginPage() {
               <span>Continue with Google</span>
             </button>
             
-            <button className="w-full py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-white font-medium transition-all duration-300 flex items-center justify-center space-x-2 text-sm">
+            <button className="w-full py-2.5 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-600/50 rounded-2xl text-white font-medium transition-all duration-300 flex items-center justify-center space-x-2 text-sm backdrop-blur-sm">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
@@ -176,8 +205,8 @@ export default function LoginPage() {
           </div>
 
           {/* Footer */}
-          <div className="mt-6 text-center">
-            <p className="text-white/70 text-sm">
+          <div className="mt-6 text-center relative z-10">
+            <p className="text-gray-400 text-sm">
               Don't have an account?{' '}
               <Link to="/signup">
               <button className="text-purple-300 hover:text-purple-100 font-medium transition-colors duration-200 hover:underline">
@@ -188,6 +217,13 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes grid-move {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(50px, 50px); }
+        }
+      `}</style>
     </div>
   );
 }
