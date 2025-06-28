@@ -72,27 +72,20 @@ export default function Navbar() {
         {/* Navigation Menu */}
         <ul className="flex list-none gap-8 items-center relative z-10">
           <li>
-            <a
+            
+            <Link to={"/explore"}
               href="#"
               className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-500 hover:text-white hover:bg-gradient-to-r hover:from-indigo-600/20 hover:to-purple-600/20 hover:-translate-y-1 hover:scale-105 relative overflow-hidden group border border-transparent hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/25"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500 rounded-lg"></div>
               <span className="relative">Explore 🚀</span>
-            </a>
+            </Link>
           </li>
           {/* DESTINATION KEEP OR NOT?? */}
           <li className="flex items-center gap-2">
 
-            
-            {/* <a 
-              href="#" 
-              className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:text-indigo-400 hover:bg-white/5 hover:-translate-y-1 relative overflow-hidden group border border-transparent hover:border-indigo-500/30"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-              <span className="relative">Destinations</span>
-            </a> */}
-
             {/* Cool "create" Icon Button */}
+            <Link to={"/create"}>
             <button
               onClick={handleAddDestination}
               onMouseEnter={() => setIsAddHovered(true)}
@@ -136,6 +129,7 @@ export default function Navbar() {
                 }`}
               ></div>
             </button>
+            </Link>
           </li>
 
           <li> 

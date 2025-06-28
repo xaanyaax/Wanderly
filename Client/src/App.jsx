@@ -5,6 +5,12 @@ import SignUpPage from "./pages/SignUp.jsx";
 import LoginPage from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Home from "./pages/Home.jsx";
+import Create from "./pages/Create.jsx";
+import Explore from "./pages/Explore.jsx";
+
+
+
+
 
 export default function App() {
   return (
@@ -21,6 +27,12 @@ export default function App() {
 
 
       <Route path="/dashboard" element={<Dashboard />} /> 
+      <Route path="/create" element={<Create />} />
+
+
+      <Route path="/explore" element={<Explore />} />
+      
+
 
       </Routes>
     </div>
