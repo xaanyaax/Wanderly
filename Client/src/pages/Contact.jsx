@@ -167,20 +167,6 @@ const Contact = () => {
         <div className="absolute top-1/2 left-3/4 w-6 h-6 bg-pink-400/30 rotate-45 animate-drift" style={{animationDelay: '5s', animationDuration: '18s'}}></div>
         <div className="absolute top-1/3 right-1/3 w-10 h-10 border-2 border-indigo-400/50 animate-wave"></div>
         
-        {/* Sparkling Stars */}
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-white rounded-full animate-sparkle"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-            }}
-          ></div>
-        ))}
-        
         {/* Grid Pattern Overlay */}
         <div 
           className="absolute inset-0 opacity-5"
