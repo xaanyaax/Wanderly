@@ -112,9 +112,7 @@ const Home = () => {
                   <h2 className="text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                     {section.title}
                   </h2>
-                  <p className="text-xl lg:text-2xl text-white leading-relaxed">
-                    {section.description}
-                  </p>
+                  
                   <div className="inline-block">
                     <div className="h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" />
                   </div>
@@ -132,15 +130,12 @@ const Home = () => {
                     <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200" />
                     <div className="relative bg-gray-900/90 backdrop-blur-sm rounded-lg p-8 border border-gray-700 group-hover:border-gray-500 transition-all duration-300">
                       <div className="text-4xl mb-4">{section.emoji}</div>
-                      <h3 className="text-2xl font-semibold mb-4 text-white">
-                        {section.title}
-                      </h3>
+                      
                       <p className="text-white leading-relaxed">
                         {section.description}
                       </p>
                       <div className="mt-6 flex items-center space-x-2 text-blue-400 group-hover:text-blue-300 transition-colors">
-                        <span>Learn more</span>
-                        <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                      
                       </div>
                     </div>
                   </div>
@@ -170,9 +165,7 @@ const Home = () => {
               <span className="relative z-10">Get Started</span>
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
-            <button className="px-8 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300">
-              Learn More
-            </button>
+            
           </div>
         </div>
       </div>
