@@ -19,8 +19,11 @@ export default function LoginPage() {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //make sure to make username , email , phone no dynamic
     try {
+
       // Replace with your actual API call
       // const res = await axios.post("http://localhost:8080/api/users/login", formData);
       console.log("Form submitted:", formData);

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
-    phoneNumber: '',
+    phone: '',
     password: '',
     confirmPassword: ''
   });
@@ -24,11 +25,11 @@ export default function SignUpPage() {
   };
 
   const handleSubmit = async () => {
+    e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
-
     if (!agreeToTerms) {
       alert("Please agree to the terms and conditions!");
       return;
@@ -36,7 +37,7 @@ export default function SignUpPage() {
 
     try {
       // Replace with your actual API call
-      // const res = await axios.post("http://localhost:8080/api/users/signup", formData);
+      const res = await axios.post("http://localhost:8080/api/users/register", formData);
       console.log("Form submitted:", formData);
       alert("Registration successful!");
       
@@ -147,16 +148,16 @@ export default function SignUpPage() {
             <div className="relative">
               <input
                 type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
+                name="phone"
+                value={formData.phone}
                 onChange={handleInputChange}
-                onFocus={() => setFocusedField('phoneNumber')}
+                onFocus={() => setFocusedField('phone')}
                 onBlur={() => setFocusedField('')}
                 className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
                 placeholder="Phone number"
                 required
               />
-              <div className={`absolute left-4 top-0 -translate-y-1/2 px-2 bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm rounded-full transition-all duration-300 ${focusedField === 'phoneNumber' || formData.phoneNumber ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
+              <div className={`absolute left-4 top-0 -translate-y-1/2 px-2 bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-sm rounded-full transition-all duration-300 ${focusedField === 'phone' || formData.phone ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
                 Phone
               </div>
             </div>
@@ -304,7 +305,7 @@ export default function SignUpPage() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes grid-move {
           0% { transform: translate(0, 0); }
           100% { transform: translate(50px, 50px); }
