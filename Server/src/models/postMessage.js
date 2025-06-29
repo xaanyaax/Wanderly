@@ -1,17 +1,13 @@
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
-  Creator: {
+
+  title: {
     type: String,
     required: true,
   },
 
-  Title: {
-    type: String,
-    required: true,
-  },
-
-  Message: {
+  message: {
     type: String,
     required: true,
   },

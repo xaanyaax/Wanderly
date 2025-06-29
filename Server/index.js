@@ -3,6 +3,7 @@ import cors from "cors";
 import connectDB from "./src/database/connect.js";
 import * as dotenv from "dotenv";
 import errorMiddleware from "./src/middlewares/errorMiddleware.js";
+import path from 'path';
 
 
 dotenv.config();
@@ -19,11 +20,13 @@ app.use(cors(corsOptions))
 
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
+app.use('/uploads', express.static(path.resolve('uploads')));
+
 
 
 //Routes:
-import postRoutes from "./src/routes/posts.js";
-app.use("/posts", postRoutes);  //every route starts with posts  local::host//8080/posts
+import postRoutes from "./src/routes/postsRoutes.js";
+app.use("/api/posts", postRoutes);  //every route starts with posts  local::host//8080/posts
 
 import userRoutes from "./src/routes/userRoutes.js";
 app.use("/api/users", userRoutes);
