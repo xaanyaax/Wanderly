@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import axios from "axios";
 
 export default function Create() {
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+
   const [formData, setFormData] = useState({
     creator: '',
     title: '',
@@ -24,13 +29,33 @@ export default function Create() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission logic here
-
+    if (isSubmitting) return; // Prevent double submission
+  
+    setIsSubmitting(true);
+  
+    const data = new FormData();
+    data.append("title", formData.title);
+    data.append("message", formData.message);
+    data.append("tags", formData.tags);
+    data.append("selectedFile", formData.file);
+  
+    try {
+      const res = await axios.post("http://localhost:8080/api/posts/create", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log("Post created:", res.data);
+      alert("Post created successfully!");
+      handleClear();
+    } catch (err) {
+      console.error("Error creating post:", err);
+      alert("Failed to create post.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-
+  
   const handleClear = () => {
     setFormData({
       creator: '',
