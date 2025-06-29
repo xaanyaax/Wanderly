@@ -1,4 +1,3 @@
-// middleware/multer.js
 import multer from 'multer';
 import path from 'path';
 
@@ -12,7 +11,7 @@ const storage = multer.diskStorage({
   }
 });
 
-// Optional: filter for image files only
+
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|webp|gif/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
@@ -21,7 +20,6 @@ const fileFilter = (req, file, cb) => {
   cb(new Error('Only image files are allowed!'));
 };
 
-// Export the upload middleware
 const upload = multer({
   storage,
   fileFilter,
