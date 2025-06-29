@@ -28,6 +28,7 @@ export default function Create() {
     e.preventDefault();
     console.log('Form submitted:', formData);
     // Handle form submission logic here
+
   };
 
   const handleClear = () => {
@@ -38,10 +39,13 @@ export default function Create() {
       tags: '',
       file: null
     });
+
     // Reset file input
     const fileInput = document.querySelector('input[type="file"]');
     if (fileInput) fileInput.value = '';
   };
+
+
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center p-4">
@@ -124,6 +128,8 @@ export default function Create() {
           }
         }
       `}</style>
+
+
 
       {/* Main Form Container */}
       <div className="relative z-10 w-full max-w-md">

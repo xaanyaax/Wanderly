@@ -3,10 +3,10 @@ import {Routes , Route} from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar.jsx";
 import SignUpPage from "./pages/SignUp.jsx";
 import LoginPage from "./pages/Login.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
 import Home from "./pages/Home.jsx";
 import Create from "./pages/Create.jsx";
 import Explore from "./pages/Explore.jsx";
+import Profile from "./pages/Profile.jsx";
 
 
 
@@ -24,9 +24,10 @@ export default function App() {
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="*" element={<div>404 Not Found</div>} />
+      <Route path="/profile" element={<Profile />} />
 
 
-      <Route path="/dashboard" element={<Dashboard />} /> 
+      
       <Route path="/create" element={<Create />} />
 
 

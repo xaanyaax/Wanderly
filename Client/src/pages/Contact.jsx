@@ -52,27 +52,9 @@ const Contact = () => {
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Enhanced CSS Animations */}
       <style>{`
-        @keyframes rotateGlobe {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        .rotate-globe {
-          animation: rotateGlobe 4s linear infinite;
-          display: inline-block;
-        }
         
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px) rotate(0deg);
-          }
-          50% {
-            transform: translateY(-20px) rotate(180deg);
-          }
-        }
+        
+       
         
         @keyframes drift {
           0% {
