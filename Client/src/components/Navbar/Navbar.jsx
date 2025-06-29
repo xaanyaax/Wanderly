@@ -72,8 +72,8 @@ export default function Navbar() {
         {/* Navigation Menu */}
         <ul className="flex list-none gap-8 items-center relative z-10">
           <li>
-            
-            <Link to={"/explore"}
+            <Link
+              to={"/explore"}
               href="#"
               className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-500 hover:text-white hover:bg-gradient-to-r hover:from-indigo-600/20 hover:to-purple-600/20 hover:-translate-y-1 hover:scale-105 relative overflow-hidden group border border-transparent hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/25"
             >
@@ -83,64 +83,66 @@ export default function Navbar() {
           </li>
           {/* DESTINATION KEEP OR NOT?? */}
           <li className="flex items-center gap-2">
-
             {/* Cool "create" Icon Button */}
             <Link to={"/create"}>
-            <button
-              onClick={handleAddDestination}
-              onMouseEnter={() => setIsAddHovered(true)}
-              onMouseLeave={() => setIsAddHovered(false)}
-              className="relative w-8 h-8 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 border border-indigo-400/30 transition-all duration-700 hover:scale-110 hover:-translate-y-1 group overflow-hidden"
-              style={{
-                boxShadow:
-                  "0 4px 15px rgba(102, 126, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-              }}
-            >
-              {/* Animated background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-
-              {/* Plus icon with rotation animation */}
-              <div
-                className={`relative flex items-center justify-center w-full h-full transition-transform duration-700 ${
-                  isAddHovered ? "rotate-90" : ""
-                }`}
+              <button
+                onClick={handleAddDestination}
+                onMouseEnter={() => setIsAddHovered(true)}
+                onMouseLeave={() => setIsAddHovered(false)}
+                className="relative w-8 h-8 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 border border-indigo-400/30 transition-all duration-700 hover:scale-110 hover:-translate-y-1 group overflow-hidden"
+                style={{
+                  boxShadow:
+                    "0 4px 15px rgba(102, 126, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                }}
               >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="text-white relative z-10"
-                >
-                  <path
-                    d="M12 5v14M5 12h14"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
-              {/* Glowing ring on hover */}
-              <div
-                className={`absolute inset-0 rounded-full border-2 border-white/50 transition-all duration-700 ${
-                  isAddHovered ? "scale-125 opacity-100" : "scale-100 opacity-0"
-                }`}
-              ></div>
-            </button>
+                {/* Plus icon with rotation animation */}
+                <div
+                  className={`relative flex items-center justify-center w-full h-full transition-transform duration-700 ${
+                    isAddHovered ? "rotate-90" : ""
+                  }`}
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="text-white relative z-10"
+                  >
+                    <path
+                      d="M12 5v14M5 12h14"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                {/* Glowing ring on hover */}
+                <div
+                  className={`absolute inset-0 rounded-full border-2 border-white/50 transition-all duration-700 ${
+                    isAddHovered
+                      ? "scale-125 opacity-100"
+                      : "scale-100 opacity-0"
+                  }`}
+                ></div>
+              </button>
             </Link>
           </li>
 
-          <li> 
+          <li>
             {/* Caution! do not nest a tag inside Link tag! */}
-            <a
-              href="#"
+
+            <Link
+              to="/profile"
               className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-500 hover:text-white hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-pink-600/20 hover:-translate-y-1 hover:scale-105 relative overflow-hidden group border border-transparent hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/25"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-pink-500/0 to-indigo-500/0 group-hover:from-purple-500/10 group-hover:via-pink-500/10 group-hover:to-indigo-500/10 transition-all duration-500 rounded-lg"></div>
               <span className="relative">Profile ✨</span>
-            </a>
+            </Link>
           </li>
 
           <li>
@@ -149,7 +151,7 @@ export default function Navbar() {
               className="text-gray-300 font-medium px-4 py-2 rounded-lg transition-all duration-500 hover:text-white hover:bg-gradient-to-r hover:from-pink-600/20 hover:to-indigo-600/20 hover:-translate-y-1 hover:scale-105 relative overflow-hidden group border border-transparent hover:border-pink-500/50 hover:shadow-lg hover:shadow-pink-500/25"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-pink-500/0 via-indigo-500/0 to-purple-500/0 group-hover:from-pink-500/10 group-hover:via-indigo-500/10 group-hover:to-purple-500/10 transition-all duration-500 rounded-lg"></div>
-              <span className="relative">Contact  ☎️</span>
+              <span className="relative">Contact ☎️</span>
             </Link>
           </li>
         </ul>
@@ -158,24 +160,24 @@ export default function Navbar() {
         <Link to={"/login"}>
           <button
             onClick={handleSignIn}
-            className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white border border-indigo-400/30 px-6 py-3 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 relative overflow-hidden group"
+            className="bg-gradient-to-r from-purple-600 via-purple-700 to-purple-800 text-white border border-purple-400/30 px-6 py-3 rounded-full font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 relative overflow-hidden group"
             style={{
               boxShadow:
-                "0 4px 15px rgba(102, 126, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                "0 4px 15px rgba(147, 51, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
               background:
-                "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)",
+                "linear-gradient(135deg, #9333ea 0%, #7c3aed 50%, #6b21a8 100%)",
             }}
             onMouseEnter={(e) => {
               e.target.style.boxShadow =
-                "0 8px 25px rgba(102, 126, 234, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)";
+                "0 8px 25px rgba(147, 51, 234, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)";
               e.target.style.background =
-                "linear-gradient(135deg, #764ba2 0%, #667eea 50%, #f093fb 100%)";
+                "linear-gradient(135deg, #7c3aed 0%, #9333ea 50%, #6b21a8 100%)";
             }}
             onMouseLeave={(e) => {
               e.target.style.boxShadow =
-                "0 4px 15px rgba(102, 126, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)";
+                "0 4px 15px rgba(147, 51, 234, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)";
               e.target.style.background =
-                "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)";
+                "linear-gradient(135deg, #9333ea 0%, #7c3aed 50%, #6b21a8 100%)";
             }}
           >
             <span className="relative">Sign In</span>
@@ -186,7 +188,7 @@ export default function Navbar() {
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
       </nav>
 
-      <style >{`
+      <style>{`
         @keyframes rotate {
           from {
             transform: rotate(0deg);
