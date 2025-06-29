@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const Post = ({ post, onPostDeleted }) => {
   const [likes, setLikes] = useState(post.likeCount || 0);
-  const [comments, setComments] = useState(32); // placeholder for now
+  const [comments, setComments] = useState(0); // placeholder for now
   const [isLiked, setIsLiked] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 

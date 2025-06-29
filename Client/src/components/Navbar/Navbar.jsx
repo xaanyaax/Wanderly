@@ -184,6 +184,7 @@ export default function Navbar() {
           </button>
         </Link>
 
+
         {/* Animated border bottom */}
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
       </nav>
