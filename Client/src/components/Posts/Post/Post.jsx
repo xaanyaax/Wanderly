@@ -1,93 +1,181 @@
-import React, { useState } from "react";
-import moment from "moment";
-import axios from "axios";
+// import { useState } from 'react';
 
-export default function Post({ post, onPostDeleted }) {
-  const [likes, setLikes] = useState(0);
+// const Post = ({ post, onPostDeleted }) => {
+//   const [likes, setLikes] = useState(post.likeCount || 0);
+//   const [comments, setComments] = useState(32); // placeholder for now
+//   const [isLiked, setIsLiked] = useState(false);
+//   const [isDeleting, setIsDeleting] = useState(false);
+
+//   const handleLike = () => {
+//     setIsLiked(!isLiked);
+//     setLikes((prev) => prev + (isLiked ? -1 : 1));
+//   };
+
+//   const handleDelete = () => {
+//     setIsDeleting(true);
+//     setTimeout(() => {
+//       onPostDeleted?.(post._id); // notify parent
+//     }, 500);
+//   };
+
+//   const getInitials = (name = "User") =>
+//     name.split(' ').map(part => part[0]).join('');
+
+//   const formatTime = (dateString) => {
+//     const now = new Date();
+//     const created = new Date(dateString);
+//     const diff = Math.floor((now - created) / 1000);
+//     if (diff < 60) return `${diff}s`;
+//     if (diff < 3600) return `${Math.floor(diff / 60)}m`;
+//     if (diff < 86400) return `${Math.floor(diff / 3600)}h`;
+//     return `${Math.floor(diff / 86400)}d`;
+//   };
+
+//   return (
+//     <div className={`bg-gray-900 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 transform ${
+//       isDeleting ? 'scale-95 opacity-0 translate-y-4' : 'hover:scale-[1.02] hover:shadow-purple-500/20'
+//     } border border-gray-800 hover:border-purple-500/30`}>
+      
+//       {/* Image */}
+//       <div className="relative group overflow-hidden">
+//         <img 
+//           src={`http://localhost:8080/${post.selectedFile}`} 
+//           alt="Post" 
+//           className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
+//         />
+//         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+//         <div className="absolute top-4 left-4 flex items-center space-x-3">
+//           <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+//             {getInitials("Anonymous")}
+//           </div>
+//           <div className="text-white">
+//             <p className="font-semibold text-lg">Anonymous</p>
+//             <p className="text-gray-300 text-sm">{formatTime(post.createdAt)} ago</p>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Content */}
+//       <div className="p-6 space-y-4">
+//         <div className="flex flex-wrap gap-2">
+//           {post.tags?.map((tag, index) => (
+//             <span key={index} className="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-sm">
+//               #{tag.trim()}
+//             </span>
+//           ))}
+//         </div>
+
+//         <p className="text-gray-300 leading-relaxed text-base">
+//           {post.message}
+//         </p>
+
+//         <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+//           <div className="flex items-center space-x-3">
+//             <button onClick={handleLike} className={`px-4 py-2 rounded-xl ${isLiked ? 'bg-pink-600 text-white' : 'bg-gray-800 text-gray-300'}`}>
+//               ❤️ {likes}
+//             </button>
+//             <button onClick={() => alert("Comments feature coming soon")} className="px-4 py-2 bg-gray-800 text-gray-300 rounded-xl">
+//               💬 {comments}
+//             </button>
+//           </div>
+//           <button onClick={handleDelete} className="px-4 py-2 bg-red-600/10 text-red-400 rounded-xl hover:bg-red-600/20">
+//             🗑️ Delete
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Post;
+
+import { useState } from 'react';
+
+const Post = ({ post, onPostDeleted }) => {
+  const [likes, setLikes] = useState(post.likeCount || 0);
+  const [comments, setComments] = useState(32); // placeholder for now
   const [isLiked, setIsLiked] = useState(false);
-
-  const { _id, creator, title, message, tags, selectedFile, createdAt } = post;
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleLike = () => {
-    setLikes((prev) => (isLiked ? prev - 1 : prev + 1));
-    setIsLiked((prev) => !prev);
+    setIsLiked(!isLiked);
+    setLikes((prev) => prev + (isLiked ? -1 : 1));
   };
 
-  const handleDelete = async () => {
-    if (window.confirm("Are you sure you want to delete this post?")) {
-      try {
-        await axios.delete(`http://localhost:8080/posts/${_id}`);
-        onPostDeleted(_id);
-      } catch (error) {
-        console.error("Delete failed:", error);
-      }
-    }
+  const handleDelete = () => {
+    setIsDeleting(true);
+    setTimeout(() => {
+      onPostDeleted?.(post._id); // notify parent
+    }, 500);
+  };
+
+  const getInitials = (name = "User") =>
+    name.split(' ').map(part => part[0]).join('');
+
+  const formatTime = (dateString) => {
+    const now = new Date();
+    const created = new Date(dateString);
+    const diff = Math.floor((now - created) / 1000);
+    if (diff < 60) return `${diff}s`;
+    if (diff < 3600) return `${Math.floor(diff / 60)}m`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}h`;
+    return `${Math.floor(diff / 86400)}d`;
   };
 
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden m-3 hover:scale-105">
-      {/* Image with author overlay */}
-      <div className="relative">
-        <img
-          src={selectedFile}
-          alt={title}
-          className="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
+    <div className={`bg-gray-900 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 transform ${
+      isDeleting ? 'scale-95 opacity-0 translate-y-4' : 'hover:scale-[1.02] hover:shadow-purple-500/20'
+    } border border-gray-800 hover:border-purple-500/30`}>
+      
+      {/* Image */}
+      <div className="relative group overflow-hidden">
+        <img 
+          src={`http://localhost:8080/${post.selectedFile}`} 
+          alt="Post" 
+          className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute top-3 left-3 bg-black bg-opacity-50 text-white px-3 py-2 rounded-lg">
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-xs font-bold">
-              {creator?.[0] || "?"}
-            </div>
-            <div>
-              <p className="text-xs font-semibold">{creator}</p>
-              <p className="text-xs opacity-80">
-                {moment(createdAt).fromNow()}
-              </p>
-            </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+        <div className="absolute top-4 left-4 flex items-center space-x-3">
+          <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+            {getInitials("Anonymous")}
+          </div>
+          <div className="text-white">
+            <p className="font-semibold text-lg">Anonymous</p>
+            <p className="text-gray-300 text-sm">{formatTime(post.createdAt)} ago</p>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-4">
-        {/* Tags */}
-        <div className="mb-3 flex flex-wrap gap-1">
-          {tags?.split(",").map((tag, i) => (
-            <span
-              key={i}
-              className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
-            >
-              #{tag.trim()}
+      <div className="p-6 space-y-4">
+        <div className="flex flex-wrap gap-2">
+          {post.tags?.map((tag, index) => (
+            <span key={index} className="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-sm">
+              {tag.trim()}
             </span>
           ))}
         </div>
 
-        {/* Description */}
-        <p className="text-gray-700 text-sm mb-4 leading-relaxed">{message}</p>
+        <p className="text-gray-300 leading-relaxed text-base">
+          {post.message}
+        </p>
 
-        {/* Actions */}
-        <div className="flex items-center justify-between">
-          <button
-            onClick={handleLike}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-              isLiked
-                ? "bg-red-500 text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            <span>{isLiked ? "❤️" : "🤍"}</span>
-            <span className="text-sm font-medium">{likes}</span>
-          </button>
-
-          <button
-            onClick={handleDelete}
-            className="flex items-center space-x-1 px-3 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
-          >
-            <span className="text-sm">🗑️</span>
-            <span className="text-sm font-medium">Delete</span>
+        <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+          <div className="flex items-center space-x-3">
+            <button onClick={handleLike} className={`px-4 py-2 rounded-xl ${isLiked ? 'bg-pink-600 text-white' : 'bg-gray-800 text-gray-300'}`}>
+              ❤️ {likes}
+            </button>
+            <button onClick={() => alert("Comments feature coming soon")} className="px-4 py-2 bg-gray-800 text-gray-300 rounded-xl">
+              💬 {comments}
+            </button>
+          </div>
+          <button onClick={handleDelete} className="px-4 py-2 bg-red-600/10 text-red-400 rounded-xl hover:bg-red-600/20">
+            🗑️ Delete
           </button>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Post;
