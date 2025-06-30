@@ -11,13 +11,14 @@ export const getPosts = async (req, res) => {
 
 export const createPosts = async (req, res) => {
   try {
-    const { creator, title, message, tags } = req.body;
+    const { title, message, tags } = req.body;
 
     const newPost = new PostMessage({
+      creator: req.user.id, //!!!!!!!!
       title,
       message,
       tags: tags?.split(",") || [],
-      selectedFile: req.file?.path || "", 
+      selectedFile: req.file?.path || "",
     });
 
     await newPost.save();
@@ -26,3 +27,4 @@ export const createPosts = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+

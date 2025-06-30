@@ -1,76 +1,114 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import axios from "axios";
 
 export default function Create() {
-
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-
   const [formData, setFormData] = useState({
-    creator: '',
-    title: '',
-    message: '',
-    tags: '',
-    file: null
+    creator: "",
+    title: "",
+    message: "",
+    tags: "",
+    file: null,
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleFileChange = (e) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      file: e.target.files[0]
+      file: e.target.files[0],
     }));
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (isSubmitting) return;
+
+  //   setIsSubmitting(true);
+
+  //   const data = new FormData();
+  //   data.append("title", formData.title);
+  //   data.append("message", formData.message);
+  //   data.append("tags", formData.tags);
+  //   data.append("selectedFile", formData.file);
+
+  //   try {
+  //     const res = await axios.post("http://localhost:8080/api/posts/create", data, {
+  //       headers: { "Content-Type": "multipart/form-data" , Authorization: `Bearer ${localStorage.getItem("token")}` },
+  //     });
+  //     console.log("Post created:", res.data);
+  //     alert("Post created successfully!");
+  //     handleClear();
+  //   } catch (err) {
+  //     console.error("Error creating post:", err);
+  //     alert("Failed to create post.");
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return; 
-  
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
-  
+
     const data = new FormData();
     data.append("title", formData.title);
     data.append("message", formData.message);
     data.append("tags", formData.tags);
     data.append("selectedFile", formData.file);
-  
+
     try {
-      const res = await axios.post("http://localhost:8080/api/posts/create", data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You must be logged in to create a post.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const res = await axios.post(
+        "http://localhost:8080/api/posts/create",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`, //jwt middleware
+          },
+        }
+      );
+
       console.log("Post created:", res.data);
       alert("Post created successfully!");
-      handleClear();
+      handleClear(); // clear form
     } catch (err) {
       console.error("Error creating post:", err);
-      alert("Failed to create post.");
+      alert(err.response?.data?.message || "Failed to create post.");
     } finally {
       setIsSubmitting(false);
     }
   };
-  
+
   const handleClear = () => {
     setFormData({
-      creator: '',
-      title: '',
-      message: '',
-      tags: '',
-      file: null
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      file: null,
     });
 
     // Reset file input
     const fileInput = document.querySelector('input[type="file"]');
-    if (fileInput) fileInput.value = '';
+    if (fileInput) fileInput.value = "";
   };
-
-
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center p-4">
@@ -78,58 +116,119 @@ export default function Create() {
       <div className="absolute inset-0 overflow-hidden">
         {/* Animated Lines */}
         <div className="absolute top-0 left-1/4 w-px h-32 bg-gradient-to-b from-purple-500 to-transparent animate-pulse"></div>
-        <div className="absolute top-1/4 right-1/3 w-px h-24 bg-gradient-to-b from-blue-500 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-1/3 left-1/2 w-px h-28 bg-gradient-to-b from-pink-500 to-transparent animate-pulse" style={{animationDelay: '2s'}}></div>
-        
+        <div
+          className="absolute top-1/4 right-1/3 w-px h-24 bg-gradient-to-b from-blue-500 to-transparent animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-1/3 left-1/2 w-px h-28 bg-gradient-to-b from-pink-500 to-transparent animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
+
         {/* Moving Diagonal Lines */}
-        <div className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-30 animate-pulse" style={{transform: 'rotate(-15deg)', animationDelay: '0.5s'}}></div>
-        <div className="absolute bottom-40 right-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-20 animate-pulse" style={{transform: 'rotate(15deg)', animationDelay: '1.5s'}}></div>
-        
+        <div
+          className="absolute top-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-30 animate-pulse"
+          style={{ transform: "rotate(-15deg)", animationDelay: "0.5s" }}
+        ></div>
+        <div
+          className="absolute bottom-40 right-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-20 animate-pulse"
+          style={{ transform: "rotate(15deg)", animationDelay: "1.5s" }}
+        ></div>
+
         {/* Geometric Shapes */}
-        <div className="absolute top-32 right-20 w-8 h-8 border border-purple-500 opacity-30 animate-spin" style={{animationDuration: '8s'}}></div>
-        <div className="absolute bottom-32 left-16 w-6 h-6 border border-blue-400 opacity-25 animate-spin" style={{animationDuration: '12s', animationDirection: 'reverse'}}></div>
+        <div
+          className="absolute top-32 right-20 w-8 h-8 border border-purple-500 opacity-30 animate-spin"
+          style={{ animationDuration: "8s" }}
+        ></div>
+        <div
+          className="absolute bottom-32 left-16 w-6 h-6 border border-blue-400 opacity-25 animate-spin"
+          style={{ animationDuration: "12s", animationDirection: "reverse" }}
+        ></div>
         <div className="absolute top-1/2 left-20 w-4 h-4 bg-pink-500 opacity-20 transform rotate-45 animate-pulse"></div>
         <div className="absolute top-3/4 right-32 w-5 h-5 bg-cyan-400 opacity-25 transform rotate-45 animate-bounce"></div>
-        
+
         {/* Floating Triangles */}
-        <div className="absolute top-40 left-1/3" style={{animation: 'float 6s ease-in-out infinite'}}>
+        <div
+          className="absolute top-40 left-1/3"
+          style={{ animation: "float 6s ease-in-out infinite" }}
+        >
           <div className="w-0 h-0 border-l-4 border-r-4 border-b-6 border-l-transparent border-r-transparent border-b-purple-500 opacity-20"></div>
         </div>
-        <div className="absolute bottom-1/4 right-1/4" style={{animation: 'float 8s ease-in-out infinite reverse'}}>
+        <div
+          className="absolute bottom-1/4 right-1/4"
+          style={{ animation: "float 8s ease-in-out infinite reverse" }}
+        >
           <div className="w-0 h-0 border-l-5 border-r-5 border-b-8 border-l-transparent border-r-transparent border-b-blue-400 opacity-15"></div>
         </div>
-        
+
         {/* Hexagons */}
-        <div className="absolute top-1/3 right-1/2 w-6 h-6 opacity-20" style={{animation: 'float 10s ease-in-out infinite'}}>
-          <div className="w-full h-full bg-gradient-to-r from-purple-500 to-pink-500" style={{clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'}}></div>
+        <div
+          className="absolute top-1/3 right-1/2 w-6 h-6 opacity-20"
+          style={{ animation: "float 10s ease-in-out infinite" }}
+        >
+          <div
+            className="w-full h-full bg-gradient-to-r from-purple-500 to-pink-500"
+            style={{
+              clipPath:
+                "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+            }}
+          ></div>
         </div>
-        
+
         {/* Dynamic Connecting Lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-10" style={{animation: 'pulse 4s ease-in-out infinite'}}>
-          <line x1="10%" y1="20%" x2="30%" y2="40%" stroke="url(#gradient1)" strokeWidth="1"/>
-          <line x1="70%" y1="30%" x2="90%" y2="60%" stroke="url(#gradient2)" strokeWidth="1"/>
-          <line x1="20%" y1="70%" x2="60%" y2="80%" stroke="url(#gradient3)" strokeWidth="1"/>
+        <svg
+          className="absolute inset-0 w-full h-full opacity-10"
+          style={{ animation: "pulse 4s ease-in-out infinite" }}
+        >
+          <line
+            x1="10%"
+            y1="20%"
+            x2="30%"
+            y2="40%"
+            stroke="url(#gradient1)"
+            strokeWidth="1"
+          />
+          <line
+            x1="70%"
+            y1="30%"
+            x2="90%"
+            y2="60%"
+            stroke="url(#gradient2)"
+            strokeWidth="1"
+          />
+          <line
+            x1="20%"
+            y1="70%"
+            x2="60%"
+            y2="80%"
+            stroke="url(#gradient3)"
+            strokeWidth="1"
+          />
           <defs>
             <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#8b5cf6"/>
-              <stop offset="100%" stopColor="#ec4899"/>
+              <stop offset="0%" stopColor="#8b5cf6" />
+              <stop offset="100%" stopColor="#ec4899" />
             </linearGradient>
             <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#3b82f6"/>
-              <stop offset="100%" stopColor="#06b6d4"/>
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#06b6d4" />
             </linearGradient>
             <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#ec4899"/>
-              <stop offset="100%" stopColor="#8b5cf6"/>
+              <stop offset="0%" stopColor="#ec4899" />
+              <stop offset="100%" stopColor="#8b5cf6" />
             </linearGradient>
           </defs>
         </svg>
-        
+
         {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }}></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)",
+            backgroundSize: "40px 40px",
+          }}
+        ></div>
       </div>
 
       {/* Custom CSS for floating animation */}
@@ -154,14 +253,15 @@ export default function Create() {
         }
       `}</style>
 
-
-
       {/* Main Form Container */}
       <div className="relative z-10 w-full max-w-md">
         <div className="bg-gray-900/80 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-8 shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2 h-12 flex items-center justify-center" style={{animation: 'glow 2s ease-in-out infinite'}}>
+            <h1
+              className="text-3xl font-bold text-white mb-2 h-12 flex items-center justify-center"
+              style={{ animation: "glow 2s ease-in-out infinite" }}
+            >
               Create a Memory ✨
             </h1>
           </div>

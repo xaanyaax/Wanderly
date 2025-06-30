@@ -27,18 +27,24 @@ export default function LoginPage() {
   
     try {
       const res = await axios.post("http://localhost:8080/api/users/login", formData);
+  
+      // ✅ Log response
       console.log("Login successful:", res.data);
   
-      // 🔐 Save token
-      // localStorage.setItem("token", res.data.token);
+      // 🔐 Save token and user info
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
   
       alert("Login successful!");
+  
+      // ✅ Redirect to home or dashboard
       navigate("/");
     } catch (err) {
       console.error("Login error:", err);
       alert(err.response?.data?.message || "Login failed. Please try again.");
     }
   };
+  
   
 
   return (
