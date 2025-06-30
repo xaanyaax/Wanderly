@@ -9,6 +9,9 @@ import Explore from "./pages/Explore.jsx";
 import Profile from "./pages/Profile.jsx";
 // import ProtectedRoute from "./components/protected/ProtectedRoute.jsx";
 
+import Logout from "./utils/Logout.jsx";
+import Delete from "./utils/Delete.jsx";
+
 export default function App() {
   return (
     <div>
@@ -23,6 +26,16 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/create" element={<Create />} />
+
+
+
+
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/delete" element={<Delete />} />
+
+
+
+
 
         {/* <Route
           path="/create"
