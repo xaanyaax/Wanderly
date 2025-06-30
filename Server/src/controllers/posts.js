@@ -17,7 +17,7 @@ export const createPosts = async (req, res) => {
       title,
       message,
       tags: tags?.split(",") || [],
-      selectedFile: req.file?.path || "", // ✅ Use the uploaded image path
+      selectedFile: req.file?.path || "", 
     });
 
     await newPost.save();

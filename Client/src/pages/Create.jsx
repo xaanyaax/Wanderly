@@ -31,7 +31,7 @@ export default function Create() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return; // Prevent double submission
+    if (isSubmitting) return; 
   
     setIsSubmitting(true);
   

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Posts from "../components/Posts/Posts.jsx"; // ✅ Your reusable component
+import Posts from "../components/Posts/Posts.jsx";
 
 export default function Explore() {
-  const [posts, setPosts] = useState([]); // ✅ Add posts state
+  const [posts, setPosts] = useState([]); 
   const [searchQuery, setSearchQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [displayText, setDisplayText] = useState("");
@@ -12,7 +12,7 @@ export default function Explore() {
 
   const fullText = "Wander. Capture. Repeat.";
 
-  // ✅ Fetch posts from backend
+  
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/posts/fetch")
@@ -54,8 +54,7 @@ export default function Explore() {
         </div>
 
         <div className="w-full max-w-4xl mx-auto mb-8">
-          {/* Search bar */}
-          {/* ... your search bar code remains same ... */}
+          
 
           {/* 🔥 Posts Section */}
           <div className="flex flex-col gap-10">
