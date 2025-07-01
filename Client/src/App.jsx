@@ -11,6 +11,7 @@ import Profile from "./pages/Profile.jsx";
 
 import Logout from "./utils/Logout.jsx";
 import Delete from "./utils/Delete.jsx";
+import ResetPassword from "./utils/Reset.password.jsx";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
 
         <Route path="/logout" element={<Logout />} />
         <Route path="/delete" element={<Delete />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
 
 
